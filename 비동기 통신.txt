@@ -5,11 +5,16 @@ https://blog.naver.com/hj_kim97/222391370482
 https://mine-it-record.tistory.com/336
 https://velog.io/@tosspayments/%EC%98%88%EC%A0%9C%EB%A1%9C-%EC%9D%B4%ED%95%B4%ED%95%98%EB%8A%94-awaitasync-%EB%AC%B8%EB%B2%95
 https://www.tosspayments.com/blog/articles/dev-8?utm_source=velog&utm_medium=blog&utm_campaign=dev-9
+https://velog.io/@seoltang/fetch-POST-Request
+https://jiurinie.tistory.com/135 **
+https://m.blog.naver.com/tonguck/221825624110
 
 
 postman
 https://velog.io/@singsoong/Postman-%ED%8C%80-%EC%9B%8C%ED%81%AC%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%95-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98
 
+
+구글에 json 검색
 
 
 
@@ -41,5 +46,15 @@ https://velog.io/@singsoong/Postman-%ED%8C%80-%EC%9B%8C%ED%81%AC%EC%8A%A4%ED%8E%
 대신에 기업대출의 만기일 등과 관련한 대출의 일정을 관리하는 기능을 추가한다
 
 자잘하게 불편했던 사항의 공통을 묶어 카테고리를 만들어본다
+
+
+
+
+
+
+
+
+
+회사에서 코틀린을 
 
 

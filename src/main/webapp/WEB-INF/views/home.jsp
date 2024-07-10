@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
@@ -27,11 +27,13 @@
 		// 이 함수는 비동기적인 함수이고 Promise를 반환 한다
 		// 비동기 함수가 반환하는 객체, 함수의 성공 또는 실패 상태를 알려줌	
 		function testConn() {
-			fetch("/api/conn")
-			.then(function(response) {
-				return response.text();
+			fetch("/api/conn",)
+			.hen(function(response) {
+				console.log("response.ok", response.ok)
+				return response.json();
 			})
 			.then(function(result){
+				console.log(result)
 				document.querySelector("div#call-me").innerText = result;
 			})
 			.catch(function(error){
@@ -56,16 +58,29 @@
 		}
 		
 		function testPost(){
-			const data = {name:"martha",
-					password:"qwer"}
+			const data = {
+				name: "클라이언트 이름",
+				password: "qwer1234",
+				age: 123,
+				
+				address:{
+					city:"강남",
+					
+				}
+				
+			}
 			
-			fetch("/api/login",{
+			fetch("/api/join",{
 				method: "POST",
-				body: JSON.stringify(data)
+				body: JSON.stringify(data),
+				headers:{
+                    'Content-Type': 'application/json'
+                },
 			})
 			.then(function(response){
-				return response.text()
+				return response.json();
 			}).then(function(result){
+				console.log(result)
 				document.querySelector("div#call-me").innerText = result.name;
 			}).catch(function(error){
 				console.log(error);

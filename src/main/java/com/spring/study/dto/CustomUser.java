@@ -5,6 +5,8 @@ public class CustomUser {
 	private String password;
 	private int age;
 
+	private Address address;
+	
 	public CustomUser() {
 	}
 
@@ -38,4 +40,13 @@ public class CustomUser {
 	public void setAge(int age) {
 		this.age = age;
 	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	
 }
