@@ -52,10 +52,47 @@ W3Schools
 
 
 
+비동기 통신 ** https://yozm.wishket.com/magazine/detail/1982/
+** https://dev-coco.tistory.com/46
+프로세스의 완료를 기다리지 않고 동시에 다른 작업을 처리하는 방식(병렬처리)
+w3school json
+
+
+프로젝트 생성
+.gitignore
+DTO + 컨트롤러 테스트 후 커밋
+home.jsp javascript 후 커밋
+
+w3school jquery
+home.jps jquery 후 커밋
 
 
 
 
-회사에서 코틀린을 
+
+https://herojoon-dev.tistory.com/25
+
+vue + spring
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
