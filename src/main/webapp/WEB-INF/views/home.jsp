@@ -28,7 +28,7 @@
 		// 비동기 함수가 반환하는 객체, 함수의 성공 또는 실패 상태를 알려줌	
 		function testConn() {
 			fetch("/api/conn",)
-			.hen(function(response) {
+			.then(function(response) {
 				console.log("response.ok", response.ok)
 				return response.json();
 			})
@@ -69,8 +69,8 @@
 				}
 				
 			}
-			
-			fetch("/api/join",{
+			const url = "/api/joinWithConverter"
+			fetch(url,{
 				method: "POST",
 				body: JSON.stringify(data),
 				headers:{

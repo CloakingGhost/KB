@@ -55,11 +55,11 @@ public class UserApiController {
 	@ResponseBody
 	public String validateInfoFetch(@RequestBody Map<String, Object> paramMap) {
 		ObjectMapper mapper = new ObjectMapper();
+		log.info("paramMap: {}", paramMap);
 
 		String jsonStr = null;
 		try {
 			jsonStr = mapper.writeValueAsString(paramMap);
-			log.info("paramMap: {}", paramMap);
 			log.info("jsonStr: {}", jsonStr);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
