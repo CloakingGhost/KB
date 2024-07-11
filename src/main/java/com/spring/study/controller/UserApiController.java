@@ -30,14 +30,14 @@ public class UserApiController {
 	@ResponseBody
 	public String connectionTest() {
 
-		return "ºñµ¿±â Åë½Å!!";
+		return "ë¹„ë™ê¸° í†µì‹ !!";
 	}
 
 	// 4
 	@RequestMapping(value = "/testJsonShape", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String testJsonShape() {
-		String str = "{\"name\":\"ÀÌ¸§ÀÔ´Ï´Ù\"}";
+		String str = "{\"name\":\"ì´ë¦„ì…ë‹ˆë‹¤\"}";
 		return str;
 	}
 
@@ -45,15 +45,15 @@ public class UserApiController {
 	@RequestMapping(value = "/testJson", method = RequestMethod.GET)
 	@ResponseBody
 	public CustomUser testJson() throws JsonParseException, JsonMappingException, IOException {
-		String str = "{\"name\":\"ÀÌ¸§ÀÔ´Ï´Ù\"}";
+		String str = "{\"name\":\"ì´ë¦„ì…ë‹ˆë‹¤\"}";
 		ObjectMapper mapper = new ObjectMapper();
 		CustomUser user = mapper.readValue(str, CustomUser.class);
 		return user;
 	}
 
-//6 Æ÷½ºÆ® ¸Ç
+//6 í¬ìŠ¤íŠ¸ë§¨
 	// 7
-	// 8 µğ¹ö±×
+	// 8 ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/join", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String validateInfoFetch(@RequestBody Map<String, Object> paramMap) {
@@ -74,15 +74,15 @@ public class UserApiController {
 		return jsonStr;
 	}
 
-// 9. servlet-context.xml ÀÚµ¿È­ ¼³Á¤
+// 9. servlet-context.xml ìë™í™”
 	@RequestMapping(value = "/joinWithConverter", method = RequestMethod.POST)
 	@ResponseBody
 	public CustomUser validateInfoJQuery(@RequestBody CustomUser user) {
-		user.getAddress().setCity("¼­¿ï");
+		user.getAddress().setCity("ì„œìš¸");
 		return user;
 	}
 
-	// 10 jquery·Î ÄÚµå º¯Çü ÈÄ
+	// 10 jquery ì¶”ê°€ í›„
 	// 11
 	@RequestMapping(value = "/joinList", method = RequestMethod.POST)
 	@ResponseBody
