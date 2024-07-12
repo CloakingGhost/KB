@@ -75,12 +75,20 @@ https://herojoon-dev.tistory.com/25
 vue + spring
 
 
+import $ from 'jquery';
+mounted 단계에서 사용
 
 
 
-sts3 javascript editor
+sts3 javascript editor 안됨
 **https://hello-melo.tistory.com/71
 **https://ysyeee.tistory.com/18
+
+
+vue cors policyhttps://notspoon.tistory.com/38
+** https://eunjinii.tistory.com/47
+
+
 
 
 
