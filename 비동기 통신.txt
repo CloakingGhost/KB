@@ -106,9 +106,23 @@ apache spring
 
 
 
+	<!-- JSON Message Converter -->
+ 	<beans:bean id="jsonHttpMessageConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter"/>
+
+	<!-- Configure AnnotationMethodHandlerAdapter -->
+ 	<beans:bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<beans:property name="messageConverters">
+			<beans:list>
+				<beans:ref bean="jsonHttpMessageConverter" />
+			</beans:list>
+		</beans:property>
+	</beans:bean> 
 
 
 
+https://www.lesstif.com/java/java-json-library-jackson-24445183.html **jackson-databind (ver.2)
 
 
 

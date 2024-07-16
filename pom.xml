@@ -110,7 +110,7 @@
 			<version>1.2</version>
 		</dependency>
 		
-		<!-- jackson -->
+		<!-- jackson ver.1 before spring 3.2.X -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
@@ -121,6 +121,13 @@
 			<artifactId>jackson-core-asl</artifactId>
 			<version>1.9.13</version>
 		</dependency>
+
+		<!-- jackson ver.2 after spring 3.2.X-->
+<!-- 		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.15.2</version>
+		</dependency> -->
 
 
 		<!-- Test -->

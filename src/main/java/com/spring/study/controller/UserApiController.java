@@ -25,25 +25,26 @@ public class UserApiController {
 	// 2
 	private static final Logger log = LoggerFactory.getLogger(UserApiController.class);
 
-	// 3
+	// 3 메소드 까지만 하고 produces는 text/plain || text/html 둘다 확인
 	@RequestMapping(value = "/conn", method = RequestMethod.GET, produces = "text/html; charset=utf-8")
 	@ResponseBody
 	public String connectionTest() {
 
-		return "비동기 통신!!";
+		return "<h1>통신 test!!</h1>";
 	}
 
-	// 4
-	@RequestMapping(value = "/testJsonShape", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	// 4 어노테이션은 나중에
+//	6 포스트맨 + postman agent + post로 확인
+	@RequestMapping(value = "/testJson", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String testJsonShape() {
 		String str = "{\"name\":\"이름입니다\"}";
 		return str;
 	}
 
-	// 5
-	@RequestMapping(value = "/testJson", method = RequestMethod.GET)
-	@ResponseBody
+	// 5 코드는 생략 Jackson bind pom.xml 추가 Address Class 먼저
+//	@RequestMapping(value = "/testJson", method = RequestMethod.GET)
+//	@ResponseBody
 	public CustomUser testJson() throws JsonParseException, JsonMappingException, IOException {
 		String str = "{\"name\":\"이름입니다\"}";
 		ObjectMapper mapper = new ObjectMapper();
@@ -51,12 +52,12 @@ public class UserApiController {
 		return user;
 	}
 
-//6 포스트맨
-	// 7
-	// 8 �����
+//
+	// 7 어노테이션은 나중에 메소드 먼저
+	// 8 
 	@RequestMapping(value = "/join", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String validateInfoFetch(@RequestBody Map<String, Object> paramMap) {
+	public String join(@RequestBody Map<String, Object> paramMap) {
 		ObjectMapper mapper = new ObjectMapper();
 		log.info("paramMap: {}", paramMap);
 
@@ -77,7 +78,7 @@ public class UserApiController {
 // 9. servlet-context.xml 자동화
 	@RequestMapping(value = "/joinWithConverter", method = RequestMethod.POST)
 	@ResponseBody
-	public CustomUser validateInfoJQuery(@RequestBody CustomUser user) {
+	public CustomUser joinWithConverter(@RequestBody CustomUser user) {
 		user.getAddress().setCity("서울");
 		return user;
 	}
@@ -86,8 +87,24 @@ public class UserApiController {
 	// 11
 	@RequestMapping(value = "/joinList", method = RequestMethod.POST)
 	@ResponseBody
-	public List<CustomUser> validateInfoJQuery(@RequestBody UserListWrapper users) {
+	public List<CustomUser> joinList(@RequestBody UserListWrapper users) {
 
 		return users.getUsers();
+	}
+	@RequestMapping(value = "/1", method = RequestMethod.GET)
+	@ResponseBody
+	public void test1() {
+		for(int i = 0; i < 1000; i++) {
+			System.out.println(i);
+		}
+		
+	}
+	@RequestMapping(value = "/2", method = RequestMethod.GET)
+	@ResponseBody
+	public void test2() {
+		for(int i = 0; i < 1000; i++) {
+			System.out.println(i);
+		}
+		
 	}
 }
