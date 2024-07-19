@@ -51,7 +51,7 @@ export default {
     },
     async testJson() {
       try {
-        const response = await axios.get('/api/testJsonShape');
+        const response = await axios.get('/api/testJson');
         this.callMe2 = response.data.name;
         console.log(response.data);
       } catch (error) {
@@ -73,7 +73,7 @@ export default {
             'Content-Type': 'application/json'
           }
         });
-        this.callMe3 = response.data.name;
+        this.callMe3 = response.data.password;
         console.log(response.data);
       } catch (error) {
         console.error(error);
@@ -82,6 +82,7 @@ export default {
     async testPostList() {
       try {
         const data = {
+          id: 77,
           users: [
             {
               name: "클라이언트 이름1",
@@ -124,6 +125,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

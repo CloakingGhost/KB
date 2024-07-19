@@ -6,7 +6,6 @@ public class UserListWrapper {
 	private int id;
 	private List<CustomUser> users;
 
-	
 	public int getId() {
 		return id;
 	}
@@ -25,5 +24,4 @@ public class UserListWrapper {
 
 
 
-	
 }

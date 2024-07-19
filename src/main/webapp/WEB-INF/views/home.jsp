@@ -12,144 +12,125 @@
 	<h1>Hello world!</h1>
 
 	<P>The time on the server is ${serverTime}.</P>
-
-	<button id="call-me-btn-1">누르시오-1</button>
-	<div id="call-me-1"></div>
-	<button id="call-me-btn-2">누르시오-2</button>
-	<div id="call-me-2"></div>
-	<button id="call-me-btn-3">누르시오-3</button>
-	<div id="call-me-3"></div>
-	<button id="call-me-btn-4">누르시오-4</button>
-	<div id="call-me-4"></div>
+	<div>
+		<div>
+			<button id="call-me-btn-1">누르시오-1</button>
+			<div id="call-me-1"></div>
+		</div>
+		<div>
+			<button id="call-me-btn-2">누르시오-2</button>
+			<div id="call-me-2"></div>
+		</div>
+		<div>
+			<button id="call-me-btn-3">누르시오-3</button>
+			<div id="call-me-3"></div>
+		</div>
+		<div>
+			<button id="call-me-btn-4">누르시오-4</button>
+			<div id="call-me-4"></div>
+		</div>
+	</div>
 	<script type="text/javascript">
-		$("#call-me-btn-1").on('click', function() {
-			testConn();
-		});
+document.querySelector("button#call-me-btn-1").addEventListener("click",() => {
+	fetch("/api/conn")
+	.then(function(response){
+		return response.text()
+		})
+	.then(function(result){
+		document.querySelector("div#call-me-1").innerHTML = `<h3>\${result}</h3>`
+	})
+})
 
-		$("#call-me-btn-2").on('click', function() {
-			testJson();
-		});
+document.querySelector("button#call-me-btn-2").addEventListener("click",() => {
+	fetch("/api/testJson")
+	.then(function(response){
+		return response.json()
+		})
+	.then(function(result){
+		document.querySelector("div#call-me-2").innerHTML = `<h3>\${result.name}</h3>`
+	})
+})
 
-		$("#call-me-btn-3").on('click', function() {
-			testPost();
-		});
-
-		$("#call-me-btn-4").on('click', function() {
-			testPostList();
-		});
-
-		function testConn() {
-			$.ajax({
-				url : "/api/conn",
-				method : "GET",
-				success : function(result) {
-					console.log(result);
-					$("#call-me-1").text(result);
-				},
-				error : function(error) {
-					console.log(error);
-				}
-			});
+document.querySelector("button#call-me-btn-3").addEventListener("click",() => {
+	const data =             {
+            "name" : "클라이언트 이름11",
+            "password" : "qwer1234",
+            "age" : 123,
+            "address" : {
+                "city" : "나주"
+            }
+        }
+	fetch("/api/testJson",{
+		method: 'post',
+		body: JSON.stringify(data),
+		headers:{
+			'Content-type' : 'application/json'
 		}
-
-		function testJson() {
-			$.ajax({
-				url : "/api/testJsonShape",
-				method : "GET",
-				success : function(result) {
-					$("#call-me-2").text(result.name);
-					console.log(result);
-					console.log(typeof (result), result.name);
-				},
-				error : function(error) {
-					console.log(error);
-				}
-			});
+	})
+	.then(function(response){
+		return response.json()
+		})
+	.then(function(result){
+		document.querySelector("div#call-me-3").innerHTML = `<h3>\${result.name}</h3>`
+	})
+})
+$('button#call-me-btn-4').on('click',function(){
+	const data ={   
+		    "id": 77,
+		    "users" :
+		        [
+		            {
+		                "name" : "클라이언트 이름11",
+		                "password" : "qwer1234",
+		                "age" : 123,
+		                "address" : {
+		                    "city" : "나주"
+		                }
+		            },
+		            {
+		                "name" : "클라이언트 이름22",
+		                "password" : "qwer1234",
+		                "age" : 123,
+		                "address" : {
+		                    "city" : "대전"
+		                }
+		            },
+		            {
+		                "name" : "클라이언트 이름33",
+		                "password" : "qwer1234",
+		                "age" : 123,
+		                "address" : {
+		                    "city" : "춘천"
+		                }
+		            }
+		        ]
 		}
-
-		function testPost() {
-			const data = {
-				name : "클라이언트 이름",
-				password : "qwer1234",
-				age : 123,
-				address : {
-					city : "대전"
-				}
-			};
-			// "/api/join" 먼저 테스트 후 변경
-			const url = "/api/joinWithConverter";
-			$.ajax({
-				url : url,
-				method : "POST",
-				contentType : "application/json",
-				data : JSON.stringify(data),
-				success : function(result) {
-					console.log(result);
-					$("#call-me-3").text(result.name);
-				},
-				error : function(error) {
-					console.log(error);
-				}
-			});
-		}
-		function testPostList() {
-			const data = {
-				users : [ {
-					name : "클라이언트 이름1",
-					password : "qwer1234",
-					age : 123,
-					address : {
-						city : "대전"
-					}
-				}, {
-					name : "클라이언트 이름2",
-					password : "qwer1234",
-					age : 123,
-					address : {
-						city : "익산"
-					}
-				}, {
-					name : "클라이언트 이름3",
-					password : "qwer1234",
-					age : 123,
-					address : {
-						city : "춘전"
-					}
-				}, ]
-			}
-
-			const url = "/api/joinList";
-			$.ajax({
-				url : url,
-				method : "POST",
-				contentType : "application/json",
-				data : JSON.stringify(data),
-				success : function(result) {
-					console.log(result);
-					$("#call-me-4").empty();
-					result.forEach((u,i) => {
-				           let userDiv = $("<div></div>").addClass("user-info-" + (i + 1));
-
-				            userDiv.append(`<p>Name: \${u.name}</p>`);
-				            userDiv.append(`<p>Password: \${u.password}</p>`);
-				            userDiv.append(`<p>Age: \${u.age}</p>`);
-				            userDiv.append(`<p>City: \${u.address.city}</p>`);
-
-				            $("#call-me-4").append(userDiv);
-				            console.log(u);
-					})
-					
-					for(let i=0; i < result.length; i++){
-						const user = result[i];
-						$("#call-me-4").append(user);
-					}
-					
-				},
-				error : function(error) {
-					console.log(error);
-				}
+	
+	$.ajax({
+		url : '/api/joinList',
+		method: 'post',
+		contentType : 'application/json',
+		data: JSON.stringify(data),
+		success: function(result){
+			$("#call-me-4").empty();
+			result.forEach((user, idx) => {
+				console.log(user)
+				let userDiv = $("<div></div>").addClass(`user-info-\${idx + 1}`);
+				
+				userDiv.append(`<p>Name: \${user.name}</p>`);
+				userDiv.append(`<p>Password: \${user.password}</p>`);
+				userDiv.append(`<p>Age: \${user.age}</p>`);
+				userDiv.append(`<p>City: \${user.address.city}</p><br>`);
+				
+				$("#call-me-4").append(userDiv);
+				
 			})
-		}
-	</script>
+		},
+		error : (error) => { console.error(error) }
+	})
+})
+
+
+</script>
 </body>
 </html>

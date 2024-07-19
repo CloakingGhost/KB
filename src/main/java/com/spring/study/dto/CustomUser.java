@@ -6,17 +6,7 @@ public class CustomUser {
 	private int age;
 
 	private Address address;
-	
-	public CustomUser() {
-	}
 
-//	public CustomUser(String name, String password, int age) {
-//		this.name = name;
-//		this.password = password;
-//		this.age = age;
-//	}
-
-	// Getters and Setters
 	public String getName() {
 		return name;
 	}
@@ -48,5 +38,10 @@ public class CustomUser {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "CustomUser [name=" + name + ", password=" + password + ", age=" + age + ", address=" + address + "]";
+	}
+
 }

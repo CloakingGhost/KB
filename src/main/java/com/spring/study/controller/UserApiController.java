@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
@@ -20,91 +19,90 @@ import com.spring.study.dto.CustomUser;
 import com.spring.study.dto.UserListWrapper;
 
 @Controller
-@RequestMapping("/api") // 1
+@RequestMapping("/api")
 public class UserApiController {
-	// 2
+
 	private static final Logger log = LoggerFactory.getLogger(UserApiController.class);
 
-	// 3 메소드 까지만 하고 produces는 text/plain || text/html 둘다 확인
-	@RequestMapping(value = "/conn", method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	@RequestMapping(value = "/conn", method = RequestMethod.GET, produces = "text/plain; charset=utf-8")
 	@ResponseBody
-	public String connectionTest() {
-
-		return "<h1>통신 test!!</h1>";
+	public String connection() {
+//		return "<h1>��� test</h1>";
+		return "��� test";
 	}
 
-	// 4 어노테이션은 나중에
-//	6 포스트맨 + postman agent + post로 확인
-	@RequestMapping(value = "/testJson", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "/testJson", method = { RequestMethod.GET,
+			RequestMethod.POST }, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String testJsonShape() {
-		String str = "{\"name\":\"이름입니다\"}";
+		String str = "{\"name\" : \"�̸��Դϴ�\"}";
 		return str;
 	}
 
-	// 5 코드는 생략 Jackson bind pom.xml 추가 Address Class 먼저
-//	@RequestMapping(value = "/testJson", method = RequestMethod.GET)
-//	@ResponseBody
-	public CustomUser testJson() throws JsonParseException, JsonMappingException, IOException {
-		String str = "{\"name\":\"이름입니다\"}";
-		ObjectMapper mapper = new ObjectMapper();
-		CustomUser user = mapper.readValue(str, CustomUser.class);
-		return user;
-	}
-
-//
-	// 7 어노테이션은 나중에 메소드 먼저
-	// 8 
 	@RequestMapping(value = "/join", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String join(@RequestBody Map<String, Object> paramMap) {
+	public String joinVer1(@RequestBody Map<String, Object> paramMap) {
 		ObjectMapper mapper = new ObjectMapper();
-		log.info("paramMap: {}", paramMap);
-
-		String jsonStr = null;
+		String toString = null;
 		try {
-			jsonStr = mapper.writeValueAsString(paramMap);
-			log.info("jsonStr: {}", jsonStr);
-		} catch (JsonProcessingException e) {
+			toString = mapper.writeValueAsString(paramMap);
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return jsonStr;
+		return toString;
 	}
 
-// 9. servlet-context.xml 자동화
-	@RequestMapping(value = "/joinWithConverter", method = RequestMethod.POST)
+	@RequestMapping(value = "/joinWithConverter", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public CustomUser joinWithConverter(@RequestBody CustomUser user) {
-		user.getAddress().setCity("서울");
+	public Map<String, Object> joinVer2(@RequestBody Map<String, Object> paramMap) {
+		paramMap.remove("name");
+		return paramMap;
+	}
+
+	@RequestMapping(value = "/joinWithClass", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public CustomUser joinVer3(@RequestBody CustomUser user) {
+		user.setName("�ٸ� �̸�");
 		return user;
 	}
-
-	// 10 jquery 추가 후
-	// 11
+	
 	@RequestMapping(value = "/joinList", method = RequestMethod.POST)
 	@ResponseBody
 	public List<CustomUser> joinList(@RequestBody UserListWrapper users) {
 
 		return users.getUsers();
 	}
+	
 	@RequestMapping(value = "/1", method = RequestMethod.GET)
 	@ResponseBody
-	public void test1() {
-		for(int i = 0; i < 1000; i++) {
+	public String test1() {
+		for(int i = 0; i < 400_000; i++) {
 			System.out.println(i);
 		}
+		return "1";
 		
 	}
 	@RequestMapping(value = "/2", method = RequestMethod.GET)
 	@ResponseBody
-	public void test2() {
-		for(int i = 0; i < 1000; i++) {
+	public String test2() {
+		for(int i = 0; i < 100_000; i++) {
 			System.out.println(i);
 		}
+		return "2";
 		
 	}
+	@RequestMapping(value = "/3", method = RequestMethod.GET)
+	@ResponseBody
+	public String test3() {
+		for(int i = 0; i < 10000; i++) {
+			System.out.println(i);
+		}
+		return "3";
+		
+	}
+	
 }
